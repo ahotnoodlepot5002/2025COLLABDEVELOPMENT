@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Open Day</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #007BFF;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .header img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+            color: white; /* White text */
+            text-shadow:
+                    -2px -2px 0 black,
+                    2px -2px 0 black,
+                    -2px 2px 0 black,
+                    2px 2px 0 black; /* Outline effect */
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .event-details, .faq {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .register-btn {
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .register-btn:hover {
+            background-color: lightseagreen;
+        }
+        .countdown {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .popup input, .popup button {
+            display: block;
+            margin: 10px auto;
+            width: 85%;
+            padding: 10px;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+    </style>
+    <script>
+        function countdownTimer() {
+            const eventDate = new Date("March 28, 2025 10:00:00").getTime();
+            const timer = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById("countdown").innerHTML = "Event has started!";
+                }
+            }, 1000);
+        }
+
+        function openPopup() {
+            document.getElementById("popup").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        function submitForm() {
+            const fullname = document.getElementById("fullname").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+
+            if (fullname === "" || email === "" || phone === "") {
+                alert("Please enter all details (Full Name, Email, and Phone Number)");
+                return;
+            }
+
+            // Redirect to confirmation page with user details
+            window.location.href = `confirmation.html?name=${encodeURIComponent(fullname)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+        }
+
+        window.onload = countdownTimer;
+    </script>
+</head>
+<body>
+
+<!-- University Header -->
+<div class="header">
+    <img src="Wolverhampton-Uni-03%20png" alt="University of Wolverhampton Logo">
+    <h1>University of Wolverhampton Open Day</h1>
+</div>
+
+<div class="container">
+    <h1>Welcome to University of Wolverhampton Open Day</h1>
+    <p>Join us to explore the campus and experience student life.</p>
+    <div class="countdown" id="countdown"></div>
+
+    <div class="event-details">
+        <h2>Event Details</h2>
+        <p><strong>Date:</strong> March 28, 2025</p>
+        <p><strong>Time:</strong> 10:00 AM - 4:00 PM</p>
+        <p><strong>Location:</strong> University of Wolverhampton Campus</p>
+    </div>
+
+    <button class="register-btn" onclick="openPopup()">Register Now</button>
+
+    <div class="faq">
+        <h2>FAQs</h2>
+        <p><strong>Q: Is registration free?</strong><br>A: Yes, registration is completely free!</p>
+        <p><strong>Q: Can I bring a guest?</strong><br>A: Yes, you are welcome to bring a guest.</p>
+        <p><strong>Q: Will there be campus tours?</strong><br>A: Yes, guided campus tours will be available.</p>
+    </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+<div class="popup" id="popup">
+    <h2>Register for Open Day</h2>
+    <form action="register.php" method="POST">
+        <input type="hidden" name="id" id="student_id"> <!-- Hidden field for update -->
+        <input type="text" name="fullname" id="fullname" placeholder="Full Name" required>
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <input type="tel" name="phone" id="phone" placeholder="Phone Number" required>
+        <button type="submit" name="register">Register</button>
+        <button type="submit" name="update">Update</button>
+    </form>
+    <button onclick="submitForm()">Submit</button>
+    <button onclick="closePopup()">Close</button>
+</div>
+
+
+</body>
+</html>
