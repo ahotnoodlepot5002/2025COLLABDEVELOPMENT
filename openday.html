@@ -136,8 +136,27 @@
                 return;
             }
 
-            // Redirect to confirmation page with user details
-            window.location.href = `confirmation.html?name=${encodeURIComponent(fullname)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+            const formData = new FormData();
+            formData.append('name', fullname);
+            formData.append('email', email);
+            formData.append('phone', phone);
+
+            fetch('submit.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                if (result.trim() === "Registration successful!") {
+                    window.location.href = `confirmation.html?name=${encodeURIComponent(fullname)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+                } else {
+                    alert("An error occurred: " + result);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Something went wrong, please try again.");
+            });
         }
 
         window.onload = countdownTimer;
