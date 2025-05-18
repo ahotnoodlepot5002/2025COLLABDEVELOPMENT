@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Open Day</title>
+  <link rel="stylesheet" href="Open Day.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    function countdownTimer() {
+      const eventDate = new Date("April 24, 2025 10:00:00").getTime();
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = eventDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML =
+          days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+        if (distance < 0) {
+          clearInterval(timer);
+          document.getElementById("countdown").innerHTML = "Event has started!";
+        }
+      }, 1000);
+    }
+
+    function submitForm() {
+      const fullname = document.getElementById("fullname").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const campus = document.getElementById("campus").value;
+
+      if (!fullname || !email || !phone || !campus) {
+        alert("Please enter all details.");
+        return;
+      }
+
+      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+
+      window.location.href = `confirmation.html?name=${encodeURIComponent(fullname)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&campus=${encodeURIComponent(campus)}`;
+    }
+
+    window.onload = countdownTimer;
+  </script>
+</head>
+<body>
+
+<div class="header">
+  <img src="University%20of%20wolverhampton.png" alt="University Logo" />
+  <h1>University of Wolverhampton Open Day</h1>
+</div>
+
+<div class="hero-banner" style="background-image: url('https://media.discordapp.net/attachments/1348671095020195890/1372552637857403062/image.jpg');">
+  <div class="banner-overlay">
+    <h1>Welcome to University of Wolverhampton Open Day</h1>
+    <p>Join us to explore the campus and experience student life.</p>
+    <div id="countdown"></div>
+    <div class="banner-form">
+      <input type="text" id="fullname" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="tel" id="phone" placeholder="Phone Number" required />
+      <select id="campus" required>
+        <option value="">Select Campus Location</option>
+        <option value="Walsall">Walsall</option>
+        <option value="Telford">Telford</option>
+        <option value="Wolverhampton">Wolverhampton</option>
+      </select>
+      <button onclick="submitForm()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<div class="section-block">
+  <h2>Event Details</h2>
+  <p><strong>Date:</strong> April 24, 2025</p>
+  <p><strong>Time:</strong> 10:00 AM – 4:00 PM</p>
+  <p><strong>Location:</strong> University of Wolverhampton Campus</p>
+</div>
+
+<div class="section-block">
+  <h2>📍 Location</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2429.916598212232!2d-2.1163!3d52.5905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870bcde74e3a185%3A0x15f46e5efb3b7c25!2sUniversity%20of%20Wolverhampton!5e0!3m2!1sen!2suk!4v1587291712333" allowfullscreen="" loading="lazy"></iframe>
+  <img src="https://media.discordapp.net/attachments/1348671095020195890/1372552643079311410/image.jpg" alt="Campus Location" class="info-image">
+</div>
+
+<div class="section-block">
+  <h2>🎓 Courses</h2>
+  <div class="section-content">
+    <img src="https://media.discordapp.net/attachments/1348671095020195890/1372552638545133680/image.jpg" alt="Courses" class="info-image">
+    <p>The University of Wolverhampton offers a diverse range of undergraduate and postgraduate courses designed to prepare students for real-world careers. On Open Day, you’ll have the opportunity to meet lecturers, explore facilities, and attend subject-specific sessions in areas such as:</p>
+    <ul>
+      <li><strong>Computing & IT</strong> – Software Development, Cybersecurity, AI, and more</li>
+      <li><strong>Engineering & Built Environment</strong> – Mechanical, Civil, and Electrical Engineering</li>
+      <li><strong>Health & Nursing</strong> – Adult, Mental Health, and Children’s Nursing</li>
+      <li><strong>Business & Management</strong> – Marketing, HR, Entrepreneurship, and Finance</li>
+      <li><strong>Law & Criminology</strong> – Legal Studies, Criminology, and Forensics</li>
+      <li><strong>Creative Arts</strong> – Animation, Graphic Design, Film & TV Production</li>
+      <li><strong>Education</strong> – Primary and Secondary Teacher Training, Early Childhood Studies</li>
+      <li><strong>Psychology & Social Sciences</strong> – Psychology, Sociology, and Social Work</li>
+    </ul>
+    <p>Course-specific presentations begin at <strong>1:00 PM</strong>. Don’t miss your chance to ask questions and get insights into the curriculum, careers, and student experience.</p>
+  </div>
+</div>
+
+
+<div class="section-block">
+  <h2>📅 Timetable</h2>
+  <div class="section-content">
+    <img src="https://media.discordapp.net/attachments/1348671095020195890/1372552643792338965/image.jpg" alt="Timetable" class="info-image">
+    <ul>
+      <li>10:00 – Welcome Talk</li>
+      <li>11:00 – Campus Tours</li>
+      <li>13:00 – Course Introductions</li>
+      <li>15:00 – Q&A and Wrap-Up</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-block">
+  <h2>❓ FAQs</h2>
+  <p><strong>Q: Is registration free?</strong><br>A: Yes, completely free!</p>
+  <p><strong>Q: Can I bring someone?</strong><br>A: Yes, you’re welcome to bring a guest.</p>
+  <p><strong>Q: Will I get a tour?</strong><br>A: Yes! Guided tours are included.</p>
+</div>
+
+</body>
+</html>
