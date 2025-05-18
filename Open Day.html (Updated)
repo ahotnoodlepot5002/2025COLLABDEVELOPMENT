@@ -83,7 +83,19 @@
 
 <div class="section-block">
   <h2>📍 Location</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  <p>The University of Wolverhampton has multiple campuses, each offering a unique learning experience. For Open Day, activities are available at:</p>
+  <ul>
+    <li><strong>Wolverhampton City Campus (Main Campus)</strong> – Home to business, computing, engineering, and creative arts. Centrally located and easily accessible by train, bus, and car.</li>
+    <li><strong>Walsall Campus</strong> – Specialises in sport, education, and health studies. Features modern facilities including a sports centre and health simulation suites.</li>
+    <li><strong>Telford Campus</strong> – Focuses on engineering, built environment, and computing. Located in a tranquil parkland setting with advanced technical labs.</li>
+  </ul>
+  <p>Travel options include:</p>
+  <ul>
+    <li>🚆 <strong>By Train:</strong> The Wolverhampton train station is a 5-minute walk from City Campus.</li>
+    <li>🚌 <strong>By Bus:</strong> Regular services run from surrounding areas to all campuses.</li>
+    <li>🚗 <strong>By Car:</strong> Free parking is available for Open Day attendees. Sat Nav: <em>WV1 1LY</em> for City Campus.</li>
+  </ul>
+  <p>Below is the map of the City Campus:</p>
   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2429.916598212232!2d-2.1163!3d52.5905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870bcde74e3a185%3A0x15f46e5efb3b7c25!2sUniversity%20of%20Wolverhampton!5e0!3m2!1sen!2suk!4v1587291712333" allowfullscreen="" loading="lazy"></iframe>
   <img src="https://media.discordapp.net/attachments/1348671095020195890/1372552643079311410/image.jpg" alt="Campus Location" class="info-image">
 </div>
