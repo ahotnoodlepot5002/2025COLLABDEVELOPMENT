@@ -4,57 +4,78 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>University Open Day</title>
-  <link rel="stylesheet" href="Open Day.css">
+  <link rel="stylesheet" href="OpenDay.css">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
-    function countdownTimer() {
-      const eventDate = new Date("April 24, 2025 10:00:00").getTime();
-      const timer = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = eventDate - now;
+  function countdownTimer() {
+    const eventDate = new Date("April 24, 2025 10:00:00").getTime();
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById("countdown").innerHTML =
-          days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+      document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s";
 
-        if (distance < 0) {
-          clearInterval(timer);
-          document.getElementById("countdown").innerHTML = "Event has started!";
-        }
-      }, 1000);
-    }
-
-    function submitForm() {
-      const fullname = document.getElementById("fullname").value;
-      const email = document.getElementById("email").value;
-      const phone = document.getElementById("phone").value;
-      const campus = document.getElementById("campus").value;
-
-      if (!fullname || !email || !phone || !campus) {
-        alert("Please enter all details.");
-        return;
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "Event has started!";
       }
+    }, 1000);
+  }
 
-      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+  function submitForm() {
+    const fullname = document.getElementById("fullname").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const campus = document.getElementById("campus").value;
 
-      window.location.href = `confirmation.html?name=${encodeURIComponent(fullname)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&campus=${encodeURIComponent(campus)}`;
+    if (!fullname || !email || !phone || !campus) {
+      alert("Please enter all details.");
+      return;
     }
 
-    window.onload = countdownTimer;
-  </script>
+    const formData = new FormData();
+    formData.append('name', fullname);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('campus', campus);
+
+    fetch('submit.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .then(result => {
+      if (result.trim().toLowerCase().includes("success")) {
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        window.location.href = `confirmation.html?name=${encodeURIComponent(fullname)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&campus=${encodeURIComponent(campus)}`;
+      } else {
+        alert("An error occurred: " + result);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert("Something went wrong, please try again.");
+    });
+  }
+
+  window.onload = countdownTimer;
+</script>
+
 </head>
 <body>
 
 <div class="header">
-  <img src="University%20of%20wolverhampton.png" alt="University Logo" />
+  <img src="images/University_of_wolverhampton.png" alt="University Logo" />
   <h1>University of Wolverhampton Open Day</h1>
 </div>
 
-<div class="hero-banner" style="background-image: url('https://media.discordapp.net/attachments/1348671095020195890/1372552637857403062/image.jpg');">
+<div class="hero-banner" style="background-image: url('images/image4.jpg');">
   <div class="banner-overlay">
     <h1>Welcome to University of Wolverhampton Open Day</h1>
     <p>Join us to explore the campus and experience student life.</p>
@@ -97,13 +118,18 @@
   </ul>
   <p>Below is the map of the City Campus:</p>
   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2429.916598212232!2d-2.1163!3d52.5905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870bcde74e3a185%3A0x15f46e5efb3b7c25!2sUniversity%20of%20Wolverhampton!5e0!3m2!1sen!2suk!4v1587291712333" allowfullscreen="" loading="lazy"></iframe>
-  <img src="https://media.discordapp.net/attachments/1348671095020195890/1372552643079311410/image.jpg" alt="Campus Location" class="info-image">
+
+  <div class="section-content">
+    <img src="images/image3.jpg" alt="Campus Location" class="info-image">
+  </div>
+</div>
+
 </div>
 
 <div class="section-block">
   <h2>🎓 Courses</h2>
   <div class="section-content">
-    <img src="https://media.discordapp.net/attachments/1348671095020195890/1372552638545133680/image.jpg" alt="Courses" class="info-image">
+    <img src="images/image2.jpg" alt="Courses" class="info-image">
     <p>The University of Wolverhampton offers a diverse range of undergraduate and postgraduate courses designed to prepare students for real-world careers. On Open Day, you’ll have the opportunity to meet lecturers, explore facilities, and attend subject-specific sessions in areas such as:</p>
     <ul>
       <li><strong>Computing & IT</strong> – Software Development, Cybersecurity, AI, and more</li>
@@ -123,7 +149,7 @@
 <div class="section-block">
   <h2>📅 Timetable</h2>
   <div class="section-content">
-    <img src="https://media.discordapp.net/attachments/1348671095020195890/1372552643792338965/image.jpg" alt="Timetable" class="info-image">
+    <img src="images/image1.jpg" alt="Timetable" class="info-image">
     <ul>
       <li>10:00 – Welcome Talk</li>
       <li>11:00 – Campus Tours</li>
